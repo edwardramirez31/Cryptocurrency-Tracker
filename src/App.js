@@ -10,6 +10,9 @@ import {
   Navbar,
   News,
 } from "./components";
+import LoginForm from "./components/Login";
+import ProtectedRoute from "./components/ProtectedRoute";
+import Register from "./components/Register";
 
 function App() {
   return (
@@ -20,23 +23,33 @@ function App() {
       <div className="main">
         <Layout>
           <div className="routes">
-            <Switch>
-              <Route exact path="/">
-                <Homepage />
-              </Route>
-              <Route exact path="/exchanges">
-                <Exchanges />
-              </Route>
-              <Route exact path="/cryptocurrencies">
-                <Cryptocurrencies />
-              </Route>
-              <Route exact path="/crypto/:coinId">
-                <CryptoDetails />
-              </Route>
-              <Route exact path="/news">
-                <News />
-              </Route>
-            </Switch>
+            <Layout.Content style={{ margin: "0 25px" }}>
+              <Switch>
+                <Route exact path="/">
+                  <Homepage />
+                </Route>
+                <Route exact path="/exchanges">
+                  <Exchanges />
+                </Route>
+                <ProtectedRoute
+                  component={Cryptocurrencies}
+                  exact
+                  path="/cryptocurrencies"
+                />
+                <Route exact path="/crypto/:id">
+                  <CryptoDetails />
+                </Route>
+                <Route exact path="/news">
+                  <News />
+                </Route>
+                <Route exact path="/login">
+                  <LoginForm />
+                </Route>
+                <Route exact path="/register">
+                  <Register />
+                </Route>
+              </Switch>
+            </Layout.Content>
           </div>
         </Layout>
         <div className="footer">
